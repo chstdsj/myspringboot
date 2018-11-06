@@ -1,0 +1,82 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      web-stat-filter.enabled: true
+      web-stat-filter.url-pattern: /*
+      web-stat-filter.exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+      # druid页面监控
+      stat-view-servlet.enabled: true
+      stat-view-servlet.url-pattern: /druid/*
+      stat-view-servlet.login-username: druid
+      stat-view-servlet.login-password: druid123
+
+  # redis 配置
+  redis:
+    host: 192.168.1.171
+    port: 6379
+    password: redis
+  # mongodb
+  data:
+    mongodb:
+      host: 127.0.0.1
+      port: 27017
+      database: taobao
+    database: 0
+    lettuce:
+      pool:
+        max-wait: -1ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000ms
+
+
+  # 缓存
+  cache:
+    # 过期时间，单位毫秒
+    redis:
+      time-to-live: 60000ms
+
+    # 缓存类型（ehcache、redis）
+    type: redis
+
+
+
+
+#公共配置与profiles选择无关
+mybatis:
+  typeAliasesPackage: com.example.demo.entity
+  mapperLocations: classpath:mapper/*.xml
+
+# 日志级别
+logging:
+  level:
+#    root: debug
+    com.example.demo: debug
+server:
+  port: 8081
+
+
+#开发配置
+#spring:
+#  profiles: dev
+#
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+#    type: com.alibaba.druid.pool.DruidDataSource

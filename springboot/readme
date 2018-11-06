@@ -1,0 +1,32 @@
+springboot项目
+
+
+application.properties：总的配置文件，存放共用的配置内容
+application-dev.properties：开发时的配置文件
+application-test.properties：测试时的配置文件
+application-prod.properties：生产时的配置文件
+
+__logback-spring.xml：logback日志配置文件,使用该文件时，把前面的下划线去掉，(默认配置)
+    pom文件：
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+__log4j2-spring.xml：log4j2日志配置文件,使用该文件时，把前面的下划线去掉，
+    pom文件:
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions><!-- 去掉默认配置 -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+log4j2-dev.xml：开发时使用的配置文件，需要在application-dev.properties配置
+log4j2-prod.xml：生产时使用的配置文件，需要在application-prod.properties配置
+log4j2-test.xml：测试时使用的配置文件，需要在application-test.properties配置
+
+注意：程序在运行时只能有一个日志文件，如果使用其中的一个，其他的删掉或把文件名称改掉
